@@ -106,8 +106,8 @@ VOLUMES = [
 ]
 
 
-def get_volume(level: int):
+def get_volume(level: int) -> bytes:
     if level < 0 or level > 100:
-        raise Exception(f'level {level} out of range, must be between 0 and 100')
+        raise ValueError(f'level {level} out of range, must be between 0 and 100')
 
     return VOLUMES[level]
