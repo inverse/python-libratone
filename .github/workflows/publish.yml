@@ -10,17 +10,19 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@master
+    - uses: actions/setup-python@v1
       with:
-        python-version: 3.8
-    - uses: dschep/install-pipenv-action@v1
+        python-version: 3.9
+    - name: Install poetry
+      uses: abatilo/actions-poetry@v2.0.0
+      with:
+        poetry-version: 1.1.7
     - name: Install pip dependencies
-      run: pipenv install -d
+      run: poetry install
     - name: Package
       run: |
-        python setup.py sdist
+        poetry build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
